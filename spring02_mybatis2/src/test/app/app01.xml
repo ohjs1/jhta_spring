@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<!-- spring에서 mybatis 연동하기 
+	1.DataSource설정(dmbs정보)
+	2.SqlSessionFactoryBean설정 (DataSource 주입, 매퍼파일 설정)
+	3.SqlSessionTemplate설정 (sqlSessionFactory 주입)
+	4. dao설정에 SqlSessionTemplate주입
+-->
+
+<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	<property name="username" value="scott"/>
+	<property name="password" value="tiger"/>
+</bean>
+
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"/>
+	<property name="mapperLocations" value="classpath*:mybatis/membersMapper.xml"/>
+</bean>
+
+<context:annotation-config />
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg index="0" ref="sqlSessionFactory"/>
+</bean>
+
+
+<bean id="dao" class="test.dao.MembersDao"/>
+<bean id="service" class="test.service.MembersService"/>
+</beans>

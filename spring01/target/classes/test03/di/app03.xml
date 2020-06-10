@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+	<bean id="dao" class="test03.di.OracleDao">
+		<property name="dbserver" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	</bean> 
+	-->
+	<bean id="dao" class="test03.di.MySqlDao">
+		<property name="dbserver" value="jdbc:mysql://@localhost:testdb"/>
+	</bean>
+	<bean id="usersController" class="test03.di.MyUsersController">
+		<property name="dao" ref="dao"/>
+	</bean>
+</beans>
