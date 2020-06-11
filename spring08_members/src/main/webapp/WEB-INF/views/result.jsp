@@ -16,6 +16,6 @@
 		<h1>요청작업 실패!</h1>
 	</c:otherwise>
 </c:choose>
-<a rhef="<%=request.getContextPath() %>/">메인으로</a>
+<a href="${ pageContext.request.contextPath }/">메인으로</a>
 </body>
 </html>
