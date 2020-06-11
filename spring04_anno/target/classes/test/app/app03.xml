@@ -14,6 +14,6 @@
 	<constructor-arg value="tiger"/>
 </bean>
 <bean id="dao" class="test.dao.MembersDao"/>
-<bean id="service" class="spring04_anno.MembersService" />
+<bean id="service" class="test.service.MembersService" />
 <bean id="controller" class="test.controller.MembersController" />	
 </beans>

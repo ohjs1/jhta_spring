@@ -5,9 +5,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="dao" class="test.dao.MembersDao" p:user="scott" p:pwd="tiger"/>
 	
-	<bean id="service" class="spring04_anno.MembersService" p:dao-ref="dao"/>
+	<bean id="service" class="test.service.MembersService" p:dao-ref="dao"/>
 	<bean id="controller" class="test.controller.MembersController" p:service-ref="service"/>
 	
 </beans>

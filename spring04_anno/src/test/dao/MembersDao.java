@@ -1,38 +1,10 @@
 package test.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class MembersDao {
-	@Autowired
-	@Qualifier("user")
-	private String user;//접속계정(scott)
-	
-	@Autowired
-	@Qualifier("pwd")
-	private String pwd;//접속비밀번호(tiger)
-	
-	public MembersDao(String user,String pwd) {
-		this.user=user;
-		this.pwd=pwd;
-	}
-	public String getUser() {
-		return user;
-	}
-	public String getPwd() {
-		return pwd;
-	}
-	
-	public MembersDao() {
-		
-	}
-	public void setUser(String user) {
-		this.user = user;
-	}
-	
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
-	}
+	public MembersDao() {}
 	
 	public void insert(String data) {
 		System.out.println(data +"추가완료!");

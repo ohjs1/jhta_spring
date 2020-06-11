@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+<!-- DispatcherServlet설정 
+	DispatcherServlet은 서블릿이름-servlet.xml 파일을 읽는다.(Controller, ViewResolver등의 정보)
+	따라서 mvc-servlet.xml파일이 필요하다.
+-->
+<servlet>
+	<servlet-name>mvc</servlet-name>
+	<servlet-class>
+		org.springframework.web.servlet.DispatcherServlet
+	</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>mvc</servlet-name>
+	<url-pattern>/</url-pattern>
+</servlet-mapping>
+</web-app>

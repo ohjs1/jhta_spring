@@ -1,9 +1,11 @@
 package test.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-import spring04_anno.MembersService;
+import test.service.MembersService;
 
+@Controller(value="mController")
 public class MembersController {
 	@Autowired private MembersService service;
 	public void setService(MembersService service) {
