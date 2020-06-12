@@ -18,10 +18,6 @@
 <title>Insert title here</title>
 <%
 	String ipage = (String)session.getAttribute("ipage");
-	String mpage = "default";
-	if(ipage != null){
-		mpage = ipage;
-	}
 %>
 </head>
 <body>
@@ -52,7 +48,7 @@
 
 <div class="container" style="margin-top:30px">
   	<div class="row">
-  	<%=mpage %>
+  	<jsp:include page="/WEB-INF/views/${ ipage }.jsp"></jsp:include>
 	</div>
 </div>
 
