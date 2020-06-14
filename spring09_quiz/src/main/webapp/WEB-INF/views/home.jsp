@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
   }
   </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>spring / quest 0612</title>
 <%
 	String ipage = (String)session.getAttribute("ipage");
 %>
@@ -27,7 +28,7 @@
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="<%=request.getContextPath() %>/">HOME</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -36,12 +37,22 @@
       <li class="nav-item">
         <a class="nav-link" href="<%=request.getContextPath() %>/member/join">회원가입</a>
       </li>
+      
+      <c:choose>
+      	<c:when test="${ loginchk == false || loginchk == '' || loginchk == null }">
+		    <li class="nav-item">
+		        <a class="nav-link" href="<%=request.getContextPath() %>/login">로그인</a>
+		    </li>    
+      	</c:when>
+      	<c:otherwise>
+      		<li class="nav-item">
+		        <a class="nav-link" href="<%=request.getContextPath() %>/logout">로그아웃</a>
+		    </li> 
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="<%=request.getContextPath() %>/member/view/users?pageNum=1">전체 유저 보기</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>    
+      	</c:otherwise>
+      </c:choose>
     </ul>
   </div>  
 </nav>
