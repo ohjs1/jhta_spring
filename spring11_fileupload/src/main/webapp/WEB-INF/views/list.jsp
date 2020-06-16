@@ -53,9 +53,20 @@ form.example::after {
 .checkbox {
 	text-align: center;
 }
+
+#wrap {
+	width: 90%;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.table {
+	text-align: center;
+}
 </style>
 </head>
 <body>
+<div id="wrap">
 	<h1>파일 리스트 </h1>
 	<table class="table">
   	<thead class="thead-dark">
@@ -83,31 +94,58 @@ form.example::after {
 	</c:forEach>
   </tbody>
 </table>
-
-<nav aria-label="...">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item active">
-      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
-
-<form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-  <input type="text" placeholder="Search.." name="search2">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form>
- <div class="checkbox">
-      <label><input type="checkbox" value="">Option 1</label>
-      <label><input type="checkbox" value="">Option 2</label>
-      <label><input type="checkbox" value="" disabled>Option 3</label>
+	
+	<nav aria-label="...">
+	  <ul class="pagination justify-content-center">
+	    <c:choose>
+	    	<c:when test="${ pg.pageNum == 1 }">
+		    	<li class="page-item disabled">
+			      	<a class="page-link" href="#" tabindex="-1">Previous</a>
+		    	</li>	
+	    	</c:when>
+	    	<c:otherwise>
+	    		<li class="page-item">
+	    			<a class="page-link" href="/spring11/file/list?pageNum=${ pg.pageNum - 1 }" tabindex="-1">Previous</a>
+	    		</li>
+	    	</c:otherwise>
+	    </c:choose>
+	    <c:forEach var="i" begin="${ pg.startPage }" end="${ pg.endPage }">
+		    <c:choose>
+		    	<c:when test="${ i == pg.pageNum }">
+				    <li class="page-item active"><a class="page-link" href="/spring11/file/list?pageNum=${ i }">${ i }</a></li>
+		    	</c:when>
+		    	<c:otherwise>
+		    		<li class="page-item"><a class="page-link" href="/spring11/file/list?pageNum=${ i }">${ i }</a></li>
+		    	</c:otherwise>
+		    </c:choose>
+	    </c:forEach>
+	    
+	    <c:choose>
+	    	<c:when test="${ pg.pageNum == pg.endPage }">
+	    		<li class="page-item disabled">
+	    			<a class="page-link" href="#">Next</a>
+	    		</li>
+	    	</c:when>
+	    	<c:otherwise>
+	    		<li class="page-item">
+	    			<a class="page-link" href="/spring11/file/list?pageNum=${ pg.pageNum + 1 }">Next</a>
+	    		</li>
+	    	</c:otherwise>
+	    </c:choose>
+	    
+	    
+	  </ul>
+	</nav>
+	
+	<form class="example" action="/spring11/search" method="post" style="margin:auto;max-width:300px">
+		 <input type="text" placeholder="Search.." name="keyword">
+		 <button type="submit"><i class="fa fa-search"></i></button>
+		 <div class="checkbox">
+		      <label><input type="checkbox" value="writer">작성자</label>
+		      <label><input type="checkbox" value="title">제목</label>
+		      <label><input type="checkbox" value="content">내용</label>
+		</div>
+	</form>
 </div>
 </body>
 </html>

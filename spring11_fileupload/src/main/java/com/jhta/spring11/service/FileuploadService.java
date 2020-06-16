@@ -1,6 +1,6 @@
 package com.jhta.spring11.service;
 
-import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +36,13 @@ public class FileuploadService {
 	
 	public int updateFile(FileinfoVO vo) {
 		return dao.updateFile(vo);
+	}
+	
+	public List<FileinfoVO> getPageList(HashMap<String, Object> map){
+		return dao.getPageList(map);
+	}
+	
+	public int getTotalCount() {
+		return dao.getTotalCount();
 	}
 }

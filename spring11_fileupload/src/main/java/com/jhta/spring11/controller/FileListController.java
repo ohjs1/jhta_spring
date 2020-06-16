@@ -1,5 +1,6 @@
 package com.jhta.spring11.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,9 +8,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhta.spring11.service.FileuploadService;
 import com.jhta.spring11.vo.FileinfoVO;
+import com.jhta.spring11.vo.Pagning;
 
 @Controller
 public class FileListController {
@@ -18,10 +21,20 @@ public class FileListController {
 	
 	
 	@GetMapping("/file/list")
-	public String getFileList(HttpSession session) {
-		System.out.println("dfsdf");
-		List<FileinfoVO> list = service.getList();
-		session.setAttribute("flist", list);
+	public String getFileList(HttpSession session, @RequestParam(required = false, defaultValue = "1") int pageNum) {
+		
+		int maxPageCount = service.getTotalCount();
+		Pagning pg = new Pagning(pageNum, maxPageCount, 5, 5);
+		
+		HashMap<String, Object>map = new HashMap<String, Object>();
+		map.put("startRow", pg.getStartRow());
+		map.put("endRow", pg.getEndRow());
+		
+		List<FileinfoVO> flist = service.getPageList(map);
+		session.setAttribute("pg", pg);
+		session.setAttribute("flist", flist);
+		
+		
 		return "list";
 	}
 }

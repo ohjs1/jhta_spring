@@ -24,4 +24,16 @@
 	<select id="selectFilename" parameterType="int" resultType="fileinfo">
 		SELECT * FROM fileinfo WHERE filenum = #{filenum}
 	</select> 
+	
+	<select id="selectPage" parameterType="hashmap" resultType="fileinfo">
+		select * from(
+    select rownum rnum, aa.* from(
+        select * from fileinfo order by filenum desc
+    	)aa
+	)<![CDATA[ where rnum >=#{startRow} and rnum <= #{endRow} ]]>
+	</select>
+	
+	<select id="maxPageCount" resultType="int">
+		select NVL(count(*), 0) cnt from fileinfo
+	</select>
 </mapper>

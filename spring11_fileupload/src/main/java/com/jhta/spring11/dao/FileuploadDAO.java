@@ -1,6 +1,7 @@
 package com.jhta.spring11.dao;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -42,5 +43,13 @@ public class FileuploadDAO {
 	
 	public FileinfoVO getFilename(int filenum) {
 		return sqlSessionTemplate.selectOne(NAMESPACE + ".selectFilename", filenum);
+	}
+	
+	public List<FileinfoVO> getPageList(HashMap<String, Object> map){
+		return sqlSessionTemplate.selectList(NAMESPACE + ".selectPage", map);
+	}
+	
+	public int getTotalCount() {
+		return sqlSessionTemplate.selectOne(NAMESPACE + ".maxPageCount");
 	}
 }

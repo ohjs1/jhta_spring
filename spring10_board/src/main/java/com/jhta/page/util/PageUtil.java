@@ -11,17 +11,18 @@ public class PageUtil {
 	private int pageBlockCount;//한페이지에 보여질 페이지의 갯수
 	private int totalRowCount;//전체 글의 갯수
 	public PageUtil() {}
-	public PageUtil(int pageNum,int totalRowCount,
-			int rowBlockCount,int pageBlockCount) {
+	public PageUtil(int pageNum,int totalRowCount, int rowBlockCount,int pageBlockCount) {
 		this.pageNum=pageNum;
 		this.totalRowCount=totalRowCount;
 		this.rowBlockCount=rowBlockCount;
 		this.pageBlockCount=pageBlockCount;
+		
 		startRow=(pageNum-1)*rowBlockCount+1;
 		endRow=startRow+rowBlockCount-1;
 		totalPageCount=(int)Math.ceil(totalRowCount/(double)rowBlockCount);
 		startPageNum=(pageNum-1)/pageBlockCount*pageBlockCount+1;
 		endPageNum=startPageNum+pageBlockCount-1;
+		
 		if(totalPageCount<endPageNum) {
 			endPageNum=totalPageCount;
 		}
