@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.checkbox {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<h1>파일 리스트 </h1>
+	<table class="table">
+  	<thead class="thead-dark">
+    <tr>
+      <th scope="col">번호</th>
+      <th scope="col">작성자</th>
+      <th scope="col">제목</th>
+      <th scope="col">내용</th>
+      <th scope="col">첨부파일</th>
+      <th scope="col">첨부파일 크기</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <c:forEach items="${ flist }" var="f">
+    <tr>
+      <td>${ f.filenum }</td>
+      <td>${ f.writer }</td>
+      <td>${ f.title }</td>
+      <td><a href="/spring11/update/file?filenum=${ f.filenum }">${ f.content }</a></td>
+      <td><a href="/spring11/resources/upload/${ f.savefilename }">${ f.savefilename }</a></td>
+      <td>${ f.filesize }</td>
+      <td><a href="/spring11/del/file?filenum=${ f.filenum }">삭제</a></td>
+    </tr>
+	</c:forEach>
+  </tbody>
+</table>
+
+<nav aria-label="...">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active">
+      <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
+<form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+  <input type="text" placeholder="Search.." name="search2">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+ <div class="checkbox">
+      <label><input type="checkbox" value="">Option 1</label>
+      <label><input type="checkbox" value="">Option 2</label>
+      <label><input type="checkbox" value="" disabled>Option 3</label>
+</div>
+</body>
+</html>
