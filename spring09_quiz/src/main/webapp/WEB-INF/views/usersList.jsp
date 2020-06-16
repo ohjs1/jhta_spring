@@ -3,7 +3,16 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
   <h2>전체 회원 정보</h2>
-  <p>가입된 전체 유저 목록 테이블 입니다.</p>            
+  <p>가입된 전체 유저 목록 테이블 입니다.</p>    
+  
+  <div class="input-group md-form form-sm form-1 pl-0">
+	  <div class="input-group-prepend">
+	    <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fas fa-search text-white"
+	        aria-hidden="true"></i></span>
+	  </div>
+	  <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search">
+	</div>
+          
   <table class="table table-striped">
     <thead>
       <tr>
@@ -53,4 +62,5 @@
 			</c:choose>		   
 		  </ul>
 		</nav>
+	
 </div>

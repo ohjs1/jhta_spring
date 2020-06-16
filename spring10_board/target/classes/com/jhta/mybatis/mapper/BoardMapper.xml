@@ -7,16 +7,28 @@
 		insert into board 
 		values(board_seq.nextval,#{writer},#{title},#{content},0,sysdate)
 	</insert>
+	
+	
+	<sql id="search">
+		<if test="field != null and field != ''">
+			where ${field} like '%'|| #{keyword} ||'%'
+		</if>
+	</sql>
+	
+	
 	<!-- 전체글의 갯수 구하기 -->
-	<select id="count" resultType="int" >
+	<select id="count" resultType="int" parameterType="hashmap">
 		select NVL(count(*),0) cnt from board
+		<include refid="search"/>
 	</select>
 	<select id="list" parameterType="hashmap" resultType="board">
 		select * from
 		(
 			select aa.*,rownum rnum from
 			(
-				select * from board order by num desc
+				select * from board
+				<include refid="search"/>
+				order by num desc
 			)aa
 		)
 		<![CDATA[	where rnum>=#{startRow} and rnum<=#{endRow}	]]>

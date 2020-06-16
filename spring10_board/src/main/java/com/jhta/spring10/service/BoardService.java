@@ -16,8 +16,8 @@ public class BoardService {
 	public int insert(BoardVO vo) {
 		return dao.insert(vo);
 	}
-	public int count() {
-		return dao.count();
+	public int count(HashMap<String, Object> map) {
+		return dao.count(map);
 	}
 	public List<BoardVO> list(HashMap<String,Object> map){
 		return dao.list(map);

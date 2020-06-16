@@ -28,10 +28,36 @@
 	</c:forEach>
 </table>
 <div>
+
 	<c:forEach var="i" begin="${pu.startPageNum }" end="${pu.endPageNum }">
-		<a href="/spring10/board/list?pageNum=${i }">${i }</a>
+	<c:choose>
+		<c:when test="${ pu.pageNum == i }">
+			<a href="/spring10/board/list?pageNum=${i }&field=${field}&keyword=${keyword}"><span style="color:blue">${ i }</span></a>
+		</c:when>
+		<c:otherwise>
+			<a href="/spring10/board/list?pageNum=${i }&field=${field}&keyword=${keyword}"><span style="color:gray">${ i }</span></a>
+		</c:otherwise>
+	</c:choose>
+		
 	</c:forEach>
 </div>
+<a href="/spring10/board/list">전체글보기</a>
+<!-- 검색 -->
+<form method="post" action="/spring10/board/list">
+	<select name="field">
+		<option value="title"
+		<c:if test="${ field == 'title' }">selected></c:if>>제목</option>
+		
+		<option value="writer"
+		<c:if test="${ field == 'writer' }">selected></c:if>>작성자</option>
+		
+		<option value="content"
+		<c:if test="${ field == 'content' }">selected></c:if>>내용</option>
+	</select>
+	
+	<input type="text" name="keyword" value="${ keyword }">
+	<input type="submit" value="검색">
+</form>
 </body>
 </html>
 
