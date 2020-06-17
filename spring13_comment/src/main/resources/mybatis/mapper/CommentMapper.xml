@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.mybatis.mapper.CommentMapper">	
+	<!-- 댓글등록 -->
+	<insert id="insert" parameterType="comments">
+		insert into comments values(comments_seq.nextval, #{mnum}, #{id}, #{comments})
+	</insert>
+	
+	<!-- 전체글의 갯수 -->
+	<select id="count" resultType="int" parameterType="int">
+		select NVL(count(*), 0) from comments
+		where mnum = #{mnum}
+	</select>
+	
+	<!-- 페이지에 해당하는 댓글목록 -->
+	<select id="getList" parameterType="hashmap" resultType="comments">
+	    select * from
+		(
+		select aa.*, rownum rnum from
+		(
+			select * from comments
+			where mnum = #{mnum}
+			order by num desc
+		)aa
+	) <![CDATA[ where rnum >= #{startRow} and rnum <= #{endRow} ]]>
+	
+	</select>
+</mapper>
