@@ -41,6 +41,10 @@ public class FileuploadDAO {
 		
 	}
 	
+	public List<FileinfoVO> searchList(HashMap<String, Object> map){
+		return sqlSessionTemplate.selectList(NAMESPACE + ".search", map);
+	}
+	
 	public FileinfoVO getFilename(int filenum) {
 		return sqlSessionTemplate.selectOne(NAMESPACE + ".selectFilename", filenum);
 	}

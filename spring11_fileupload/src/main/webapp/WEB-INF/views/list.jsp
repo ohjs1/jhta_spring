@@ -67,7 +67,7 @@ form.example::after {
 </head>
 <body>
 <div id="wrap">
-	<h1>파일 리스트 </h1>
+	<h1>파일 리스트  ${searchList} </h1>
 	<table class="table">
   	<thead class="thead-dark">
     <tr>
@@ -78,9 +78,11 @@ form.example::after {
       <th scope="col">첨부파일</th>
       <th scope="col">첨부파일 크기</th>
       <th scope="col"></th>
+      <th scope="col">다운로드</th>
     </tr>
   </thead>
   <tbody>
+ 
   <c:forEach items="${ flist }" var="f">
     <tr>
       <td>${ f.filenum }</td>
@@ -90,6 +92,7 @@ form.example::after {
       <td><a href="/spring11/resources/upload/${ f.savefilename }">${ f.savefilename }</a></td>
       <td>${ f.filesize }</td>
       <td><a href="/spring11/del/file?filenum=${ f.filenum }">삭제</a></td>
+      <td><a href="/spring11/file/download?filenum=${ f.filenum }">다운로드</a></td>
     </tr>
 	</c:forEach>
   </tbody>
@@ -141,9 +144,9 @@ form.example::after {
 		 <input type="text" placeholder="Search.." name="keyword">
 		 <button type="submit"><i class="fa fa-search"></i></button>
 		 <div class="checkbox">
-		      <label><input type="checkbox" value="writer">작성자</label>
-		      <label><input type="checkbox" value="title">제목</label>
-		      <label><input type="checkbox" value="content">내용</label>
+		      <label><input type="checkbox" name="searchbox" value="writer">작성자</label>
+		      <label><input type="checkbox" name="searchbox" value="title">제목</label>
+		      <label><input type="checkbox" name="searchbox" value="content">내용</label>
 		</div>
 	</form>
 </div>

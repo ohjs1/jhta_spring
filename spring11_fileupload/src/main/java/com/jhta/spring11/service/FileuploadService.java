@@ -45,4 +45,8 @@ public class FileuploadService {
 	public int getTotalCount() {
 		return dao.getTotalCount();
 	}
+	
+	public List<FileinfoVO> searchList(HashMap<String, Object> map){
+		return dao.searchList(map);
+	}
 }
