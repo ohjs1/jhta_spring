@@ -54,19 +54,12 @@ form.example::after {
 	text-align: center;
 }
 
-#wrap {
-	width: 90%;
-	margin: auto;
-	margin-top: 50px;
-}
-
 .table {
 	text-align: center;
 }
 </style>
 </head>
 <body>
-<div id="wrap">
 	<h1>파일 리스트  ${searchList} </h1>
 	<table class="table">
   	<thead class="thead-dark">
@@ -140,7 +133,7 @@ form.example::after {
 	  </ul>
 	</nav>
 	
-	<form class="example" action="/spring11/search" method="post" style="margin:auto;max-width:300px">
+	<form class="example" action="/spring11/file/list" style="margin:auto;max-width:300px">
 		 <input type="text" placeholder="Search.." name="keyword">
 		 <button type="submit"><i class="fa fa-search"></i></button>
 		 <div class="checkbox">
@@ -149,6 +142,5 @@ form.example::after {
 		      <label><input type="checkbox" name="searchbox" value="content">내용</label>
 		</div>
 	</form>
-</div>
 </body>
 </html>

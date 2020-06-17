@@ -25,28 +25,27 @@
 		SELECT * FROM fileinfo WHERE filenum = #{filenum}
 	</select> 
 	
+	<sql id="search">
+		<if test="field != null">
+					where
+			<foreach collection="field" item="type" index="0" separator="or">
+					${type} like '%'||#{keyword}||'%'
+			</foreach>
+		</if>
+	</sql>
+	
+	<!-- 전체글 페이징 처리 -->
 	<select id="selectPage" parameterType="hashmap" resultType="fileinfo">
-		select * from(
+	select * from(
     select rownum rnum, aa.* from(
-        select * from fileinfo order by filenum desc
+        select * from fileinfo
+        <include refid="search"/>
+        order by filenum desc
     	)aa
 	)<![CDATA[ where rnum >=#{startRow} and rnum <= #{endRow} ]]>
 	</select>
 	
 	<select id="maxPageCount" resultType="int">
 		select NVL(count(*), 0) cnt from fileinfo
-	</select>
-	
-	<select id="search" resultType="fileinfo" parameterType="hashmap">
-		select * from fileinfo where 
-		<if test="chkbox != null">
-			 #{chkbox} like '%' || ${keyword} || '%'
-		</if>
-		<if test="title != null">
-			 #{title} like '%' || ${keyword} || '%'
-		</if>
-		<if test="content != null">
-			 #{content} like '%' || ${keyword} || '%'
-		</if>
 	</select>
 </mapper>

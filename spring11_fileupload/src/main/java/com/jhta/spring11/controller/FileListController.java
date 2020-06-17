@@ -21,7 +21,10 @@ public class FileListController {
 	
 	
 	@GetMapping("/file/list")
-	public String getFileList(HttpSession session, @RequestParam(required = false, defaultValue = "1") int pageNum) {
+	public String getFileList(HttpSession session, @RequestParam(required = false, defaultValue = "1") int pageNum,
+			@RequestParam(value = "searchbox", required = false) String[] checkboxValue, String keyword) {
+		
+		//System.out.println(checkboxValue);
 		
 		int maxPageCount = service.getTotalCount();
 		Pagning pg = new Pagning(pageNum, maxPageCount, 5, 5);
@@ -29,8 +32,11 @@ public class FileListController {
 		HashMap<String, Object>map = new HashMap<String, Object>();
 		map.put("startRow", pg.getStartRow());
 		map.put("endRow", pg.getEndRow());
-		
+		map.put("field", checkboxValue);
+		map.put("keyword", keyword);
+
 		List<FileinfoVO> flist = service.getPageList(map);
+		session.setAttribute("field", checkboxValue);
 		session.setAttribute("pg", pg);
 		session.setAttribute("flist", flist);
 		
