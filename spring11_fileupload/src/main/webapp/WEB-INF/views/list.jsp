@@ -60,7 +60,7 @@ form.example::after {
 </style>
 </head>
 <body>
-	<h1>파일 리스트  ${searchList} </h1>
+	<h1>파일 리스트</h1>
 	<table class="table">
   	<thead class="thead-dark">
     <tr>
@@ -137,9 +137,21 @@ form.example::after {
 		 <input type="text" placeholder="Search.." name="keyword">
 		 <button type="submit"><i class="fa fa-search"></i></button>
 		 <div class="checkbox">
-		      <label><input type="checkbox" name="searchbox" value="writer">작성자</label>
-		      <label><input type="checkbox" name="searchbox" value="title">제목</label>
-		      <label><input type="checkbox" name="searchbox" value="content">내용</label>
+		      <input type="checkbox" name="searchbox" value="writer"
+		      <c:if test="${ writer == 'checked' && writer != null }">
+		      	checked="checked"
+		      </c:if>
+		      >작성자
+		      <input type="checkbox" name="searchbox" value="title"
+		      <c:if test="${ title == 'checked' && title != null }">
+		      	checked="checked"
+		      </c:if>
+		      >제목
+		      <input type="checkbox" name="searchbox" value="content"
+		      <c:if test="${ content == 'checked' && content != null }">
+		      	checked="checked"
+		      </c:if>
+		      >내용
 		</div>
 	</form>
 </body>

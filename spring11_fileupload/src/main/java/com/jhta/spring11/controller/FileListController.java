@@ -16,28 +16,43 @@ import com.jhta.spring11.vo.Pagning;
 
 @Controller
 public class FileListController {
+	
 	@Autowired
 	private FileuploadService service;
-	
 	
 	@GetMapping("/file/list")
 	public String getFileList(HttpSession session, @RequestParam(required = false, defaultValue = "1") int pageNum,
 			@RequestParam(value = "searchbox", required = false) String[] checkboxValue, String keyword) {
-		
-		//System.out.println(checkboxValue);
-		
+			
 		HashMap<String, Object>map = new HashMap<String, Object>();
 		map.put("field", checkboxValue);
 		map.put("keyword", keyword);
 
 		int maxPageCount = service.getTotalCount(map);
-		System.out.println(maxPageCount + " 전체글 개수");
+
 		Pagning pg = new Pagning(pageNum, maxPageCount, 5, 5);
 		map.put("startRow", pg.getStartRow());
 		map.put("endRow", pg.getEndRow());
+
+		session.setAttribute("writer", "unchecked");
+		session.setAttribute("title", "unchecked");
+		session.setAttribute("content", "unchecked");
+
+		if(checkboxValue != null) {
+			
+			for(String srr : checkboxValue) {
+				
+				if(srr.equals("writer")) {
+					session.setAttribute("writer", "checked");
+				} else if(srr.equals("title")) {
+					session.setAttribute("title", "checked");
+				} else if(srr.equals("content")) {
+					session.setAttribute("content", "checked");
+				}
+			}
+		} 
 		
 		List<FileinfoVO> flist = service.getPageList(map);
-		session.setAttribute("field", checkboxValue);
 		session.setAttribute("pg", pg);
 		session.setAttribute("flist", flist);
 		
