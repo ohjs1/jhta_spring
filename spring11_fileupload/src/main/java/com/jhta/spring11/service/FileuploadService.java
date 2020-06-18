@@ -42,8 +42,8 @@ public class FileuploadService {
 		return dao.getPageList(map);
 	}
 	
-	public int getTotalCount() {
-		return dao.getTotalCount();
+	public int getTotalCount(HashMap<String, Object> map) {
+		return dao.getTotalCount(map);
 	}
 	
 	public List<FileinfoVO> searchList(HashMap<String, Object> map){

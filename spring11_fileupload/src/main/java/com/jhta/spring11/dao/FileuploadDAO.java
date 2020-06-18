@@ -53,7 +53,7 @@ public class FileuploadDAO {
 		return sqlSessionTemplate.selectList(NAMESPACE + ".selectPage", map);
 	}
 	
-	public int getTotalCount() {
-		return sqlSessionTemplate.selectOne(NAMESPACE + ".maxPageCount");
+	public int getTotalCount(HashMap<String, Object> map) {
+		return sqlSessionTemplate.selectOne(NAMESPACE + ".maxPageCount", map);
 	}
 }

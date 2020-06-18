@@ -15,8 +15,15 @@ public class Pagning {
 	private int totalRowCount; //전체 글의 갯수
 	
 	public Pagning() {}
-	
+	/**
+	 * 
+	 * @param pageNum 페이지 번호
+	 * @param totalRowCount 전체 글 수
+	 * @param rowBlockCount 페이지당 글 수
+	 * @param pageBlockCount 한화면에 보일 페이지수
+	 */
 	public Pagning(int pageNum, int totalRowCount, int rowBlockCount, int pageBlockCount) {
+		
 		this.pageNum = pageNum;
 		this.totalRowCount = totalRowCount;
 		this.rowBlockCount = rowBlockCount;
@@ -66,7 +73,6 @@ public class Pagning {
 	}
 
 	public int getStartPage() {
-//		System.out.println(startPage + ", startPage");
 		return startPage;
 	}
 
@@ -75,7 +81,6 @@ public class Pagning {
 	}
 
 	public int getEndPage() {
-//		System.out.println(endPage + ", endPage");
 		return endPage;
 	}
 

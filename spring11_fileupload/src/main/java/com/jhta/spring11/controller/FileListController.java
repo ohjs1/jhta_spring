@@ -26,15 +26,16 @@ public class FileListController {
 		
 		//System.out.println(checkboxValue);
 		
-		int maxPageCount = service.getTotalCount();
-		Pagning pg = new Pagning(pageNum, maxPageCount, 5, 5);
-		
 		HashMap<String, Object>map = new HashMap<String, Object>();
-		map.put("startRow", pg.getStartRow());
-		map.put("endRow", pg.getEndRow());
 		map.put("field", checkboxValue);
 		map.put("keyword", keyword);
 
+		int maxPageCount = service.getTotalCount(map);
+		System.out.println(maxPageCount + " 전체글 개수");
+		Pagning pg = new Pagning(pageNum, maxPageCount, 5, 5);
+		map.put("startRow", pg.getStartRow());
+		map.put("endRow", pg.getEndRow());
+		
 		List<FileinfoVO> flist = service.getPageList(map);
 		session.setAttribute("field", checkboxValue);
 		session.setAttribute("pg", pg);

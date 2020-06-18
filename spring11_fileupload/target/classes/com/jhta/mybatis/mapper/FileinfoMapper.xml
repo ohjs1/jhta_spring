@@ -45,7 +45,8 @@
 	)<![CDATA[ where rnum >=#{startRow} and rnum <= #{endRow} ]]>
 	</select>
 	
-	<select id="maxPageCount" resultType="int">
+	<select id="maxPageCount" resultType="int" parameterType="hashmap">
 		select NVL(count(*), 0) cnt from fileinfo
+		<include refid="search"/>
 	</select>
 </mapper>

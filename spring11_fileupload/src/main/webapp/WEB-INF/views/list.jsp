@@ -133,7 +133,7 @@ form.example::after {
 	  </ul>
 	</nav>
 	
-	<form class="example" action="/spring11/file/list" style="margin:auto;max-width:300px">
+	<form class="example" action="/spring11/file/list?pageNum=${ pg.pageNum }" style="margin:auto;max-width:300px">
 		 <input type="text" placeholder="Search.." name="keyword">
 		 <button type="submit"><i class="fa fa-search"></i></button>
 		 <div class="checkbox">
