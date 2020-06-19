@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.MembersMapper">	
+	<insert id="insert" parameterType="com.jhta.spring20.vo.MembersVo">
+		insert into members values(#{num},#{name},#{phone},#{addr},sysdate)
+	</insert>
+	<select id="list" resultType="com.jhta.spring20.vo.MembersVo">
+		select * from members
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from members where num=#{num}
+	</delete>
+	<update id="update" parameterType="com.jhta.spring20.vo.MembersVo">
+		update members
+		set phone=#{phone},addr=#{addr}
+		where num=#{num}
+	</update>
+	<select id="getinfo" parameterType="int" resultType="com.jhta.spring20.vo.MembersVo">
+		select * from members where num=#{num}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
