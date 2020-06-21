@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhta.board.mybatis.mapper.BoardMapper">	
+	<insert id="insert" parameterType="board">
+		insert into board values(board_seq.nextval, #{writer}, #{title}, #{content}, 0, sysdate)
+	</insert>
+	
+	<sql id="search">
+		<if test="field != null and field != ''">
+			where ${field} like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+	<select id="list" resultType="board" parameterType="hashmap">
+		select * from(
+			select aa.*, rownum rnum from (
+				select * from board 
+				<include refid="search"/>
+				order by num desc
+			)aa
+		)<![CDATA[ where rnum>=#{startRow} and rnum<=#{endRow} ]]>
+	</select>
+	
+	<select id="count" resultType="int" parameterType="hashmap">
+		select NVL(count(*), 0) cnt from board
+		<include refid="search"/>
+	</select>
+</mapper>

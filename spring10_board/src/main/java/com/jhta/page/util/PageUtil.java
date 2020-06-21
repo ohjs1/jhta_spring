@@ -19,10 +19,10 @@ public class PageUtil {
 		
 		startRow=(pageNum-1)*rowBlockCount+1;
 		endRow=startRow+rowBlockCount-1;
-		totalPageCount=(int)Math.ceil(totalRowCount/(double)rowBlockCount);
 		startPageNum=(pageNum-1)/pageBlockCount*pageBlockCount+1;
 		endPageNum=startPageNum+pageBlockCount-1;
 		
+		totalPageCount=(int)Math.ceil(totalRowCount/(double)rowBlockCount);
 		if(totalPageCount<endPageNum) {
 			endPageNum=totalPageCount;
 		}
