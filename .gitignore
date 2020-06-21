@@ -40,7 +40,7 @@ local.properties
 .target
 
 # Tern plugin
-.tern-project
+https://github.com/ohjs1.tern-project
 
 # TeXlipse plugin
 .texlipse
@@ -92,5 +92,8 @@ local.properties
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+#server
+/Servers
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
